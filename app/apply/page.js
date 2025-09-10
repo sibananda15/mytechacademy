@@ -2,7 +2,7 @@
 import Section from "@/components/Section";
 import { useSearchParams } from "next/navigation";
 
-export const metadata = { title: "Apply • MyTechAcademy" };
+// export const metadata = { title: "Apply • MyTechAcademy" };
 
 export default function Page(){
   const params = useSearchParams();
