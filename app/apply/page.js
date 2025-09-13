@@ -59,9 +59,6 @@ function ApplyForm() {
         <button className="btn" type="submit">
           Submit Application
         </button>
-        <p className="small text-gray-500">
-          Powered by Formspree. Replace the endpoint with your own.
-        </p>
       </form>
     </Section>
   );
