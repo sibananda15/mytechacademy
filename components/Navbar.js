@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { SITE } from "@/lib/data";
 
 const links = [
@@ -19,7 +20,13 @@ export default function Navbar(){
     <header className="border-b bg-white/80 sticky top-0 z-50 backdrop-blur">
       <div className="container flex items-center justify-between py-3">
         <Link href="/" className="flex items-center gap-2">
-          <img src="/logo.svg" alt="logo" className="w-8 h-8" />
+          <Image
+            src="/logo.svg"
+            alt="logo"
+            width={32}
+            height={32}
+            priority
+          />
           <span className="font-semibold">{SITE.name}</span>
         </Link>
         <nav className="hidden md:flex gap-6 text-sm">

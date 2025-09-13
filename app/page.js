@@ -1,40 +1,53 @@
 import Link from "next/link";
+import Image from "next/image";
 import Section from "@/components/Section";
-import CourseCard from "@/components/CourseCard";
-import InstructorCard from "@/components/InstructorCard";
 import CTA from "@/components/CTA";
-import { SITE, COURSES, INSTRUCTORS, FAQ, MANAGEMENT } from "@/lib/data";
+import { SITE, COURSES, INSTRUCTORS, FAQ } from "@/lib/data";
+import dynamic from "next/dynamic";
+
+// ✅ Lazy load heavy components
+const CourseCard = dynamic(() => import("@/components/CourseCard"), {
+  loading: () => <p>Loading course...</p>, // optional placeholder
+});
+
+const InstructorCard = dynamic(() => import("@/components/InstructorCard"), {
+  loading: () => <p>Loading instructor...</p>,
+});
 
 export default function Home() {
   return (
-    <>
-      <section className="py-16 bg-gradient-to-b from-blue-50 to-white">
-        <div className="container grid md:grid-cols-2 gap-8 items-center">
+    <main>
+      {/* Hero Section */}
+      <Section
+        title="Frontend, Backend, and Full-Stack the right way"
+        subtitle="Practical, interview-ready skills. Live cohorts, projects, and mentorship."
+      >
+        <div className="grid md:grid-cols-2 gap-8 items-center">
           <div>
-            <h1 className="h1">{SITE.tagline}</h1>
-            <p className="mt-4 text-gray-700">
-              Practical, interview‑ready skills. Live cohorts, projects, and
-              mentorship.
-            </p>
-            <div className="mt-6 flex gap-3">
+            <h1 className="text-3xl md:text-4xl font-bold leading-snug">
+              Learn. Build. Get Hired.
+            </h1>
+            <p className="mt-4 text-gray-700">{SITE.tagline}</p>
+            <div className="mt-6 flex gap-4">
               <Link href="/apply" className="btn">
-                {SITE.ctaText}
+                Apply Now
               </Link>
-              <Link href="/courses" className="btn bg-gray-900">
+              <Link href="/courses" className="btn btn-outline">
                 See Courses
               </Link>
             </div>
-            <p className="small mt-3">
-              Call us at{" "}
-              <a className="link" href={`tel:${SITE.phone}`}>
-                {SITE.phone}
-              </a>
-            </p>
           </div>
+
           <div className="border rounded-xl p-6 bg-white shadow">
-            <img src="/logo.svg" alt="MyTechAcademy" className="w-16 h-16" />
+            <Image
+              src="/logo.svg"
+              alt="MyTechAcademy"
+              width={64}
+              height={64}
+              priority
+            />
             <p className="mt-4">
-              “We focus on real‑world projects, clean code, and the how‑and‑why
+              “We focus on real-world projects, clean code, and the how-and-why
               behind every decision.”
             </p>
             <ul className="mt-4 grid grid-cols-2 gap-3 text-sm">
@@ -46,48 +59,43 @@ export default function Home() {
             </ul>
           </div>
         </div>
-      </section>
-      <Section id="courses" title="Courses" subtitle="Pick a focused track.">
-        <div className="grid md:grid-cols-3 gap-6">
-          {COURSES.map((c) => (
-            <CourseCard key={c.id} course={c} />
-          ))}
-        </div>
       </Section>
-      <Section
-        id="instructors"
-        title="Instructors"
-        subtitle="Learn from people who build and ship."
-      >
-        <div className="grid md:grid-cols-2 gap-6">
-          {INSTRUCTORS.map((i) => (
-            <InstructorCard key={i.name} instructor={i} />
+
+      {/* Courses Section */}
+      <Section title="Courses" subtitle="Pick a focused track.">
+        <div className="grid md:grid-cols-3 gap-6">
+          {COURSES.map((course) => (
+            <CourseCard key={course.id} course={course} />
           ))}
         </div>
       </Section>
 
+      {/* Instructors Section */}
       <Section
-        id="management"
-        title="Management"
-        subtitle="Guided by experienced leaders."
+        title="Instructors"
+        subtitle="Industry experts with years of experience."
       >
         <div className="grid md:grid-cols-2 gap-6">
-          {MANAGEMENT.map((m) => (
-            <InstructorCard key={m.name} instructor={m} />
+          {INSTRUCTORS.map((inst) => (
+            <InstructorCard key={inst.name} instructor={inst} />
           ))}
         </div>
       </Section>
-      <Section id="faq" title="FAQ">
-        <div className="grid md:grid-cols-2 gap-6">
-          {FAQ.map((item, idx) => (
-            <div key={idx} className="card">
+
+      {/* FAQ Section */}
+      <Section title="Frequently Asked Questions">
+        <div className="space-y-4">
+          {FAQ.map((item, i) => (
+            <div key={i} className="p-4 border rounded">
               <p className="font-semibold">{item.q}</p>
-              <p className="text-sm text-gray-700 mt-2">{item.a}</p>
+              <p className="text-sm text-gray-700 mt-1">{item.a}</p>
             </div>
           ))}
         </div>
       </Section>
+
+      {/* Call to Action */}
       <CTA />
-    </>
+    </main>
   );
 }

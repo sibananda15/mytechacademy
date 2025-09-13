@@ -1,4 +1,5 @@
-import Link from "next/link";
+
+import Image from "next/image";
 import { SITE } from "@/lib/data";
 
 export default function Footer(){
@@ -7,7 +8,7 @@ export default function Footer(){
       <div className="container py-10 grid md:grid-cols-3 gap-6">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <img src="/logo.svg" alt="logo" className="w-8 h-8"/>
+            <Image src="/logo.svg" alt="logo" width={32} height={32} />
             <span className="font-semibold">{SITE.name}</span>
           </div>
           <p className="small">{SITE.tagline}</p>
