@@ -13,7 +13,7 @@ function ApplyForm() {
       subtitle="Takes 2 minutes. We'll get back within 24 hours."
     >
       <form
-        action="https://formspree.io/f/your-form-id" // 🔑 Replace with your real Formspree endpoint
+        action="https://formspree.io/f/movnbpwe" 
         method="POST"
         className="card grid gap-4 max-w-xl"
       >
