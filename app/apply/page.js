@@ -1,8 +1,9 @@
 "use client";
+import { Suspense } from "react";
 import Section from "@/components/Section";
 import { useSearchParams } from "next/navigation";
 
-export default function Page() {
+function ApplyForm() {
   const params = useSearchParams();
   const course = params.get("course") || "";
 
@@ -12,7 +13,7 @@ export default function Page() {
       subtitle="Takes 2 minutes. We'll get back within 24 hours."
     >
       <form
-        action="https://formspree.io/f/xbldvzlp"  // Replace with your real Formspree endpoint
+        action="https://formspree.io/f/your-form-id" // 🔑 Replace with your real Formspree endpoint
         method="POST"
         className="card grid gap-4 max-w-xl"
       >
@@ -58,10 +59,18 @@ export default function Page() {
         <button className="btn" type="submit">
           Submit Application
         </button>
-        {/* <p className="small text-gray-500">
+        <p className="small text-gray-500">
           Powered by Formspree. Replace the endpoint with your own.
-        </p> */}
+        </p>
       </form>
     </Section>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div className="p-6">Loading form...</div>}>
+      <ApplyForm />
+    </Suspense>
   );
 }
