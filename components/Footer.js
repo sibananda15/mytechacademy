@@ -22,7 +22,7 @@ export default function Footer(){
         </div>
         <div className="small text-gray-500">
           <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
-          <p className="mt-2">Built with Next.js + Tailwind CSS.</p>
+          {/* <p className="mt-2">Built with Next.js + Tailwind CSS.</p> */}
         </div>
       </div>
     </footer>
